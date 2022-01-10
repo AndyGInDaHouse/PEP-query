@@ -1,9 +1,11 @@
 import java.io.File
 import kotlin.system.measureNanoTime
 
+val file = File("src/main/resources/PEP_listen.csv")
+
 fun main(args: Array<String>) {
     // Create HashMap
-    val map = createMap("src/main/resources/PEP_listen.csv")
+    val map = createMap()
     val person = args[0] + " " + args[1] + " " + args[2]
     fun query(person: String): Boolean {
         return map.containsKey(person)
@@ -11,14 +13,14 @@ fun main(args: Array<String>) {
 
 //    testMap(map)
 
-//    testAgainstList(person, map)
+//    testAgainstList(map, person)
 
     println(query(person))
 }
 // Iterate file and split lines to extract map key from columns
-fun createMap(file: String): HashMap<String, Boolean> {
+fun createMap(): HashMap<String, Boolean> {
     val map = HashMap<String, Boolean>()
-    File(file).forEachLine {
+    file.forEachLine {
         // some lines are not persons, these are empty in the birthday column
         val splitLine = it.split(';')
         if (splitLine[2].isNotEmpty()) {
@@ -31,8 +33,7 @@ fun createMap(file: String): HashMap<String, Boolean> {
 
 // Test for elements not in map. If only invalid (not a person) lines print here the map is complete.
 fun testMap(map: HashMap<String, Boolean>) {
-    val testFile = File("src/main/resources/PEP_listen.csv")
-    testFile.forEachLine {
+    file.forEachLine {
         val splitList = it.split(';')
         if ( true) {
             val key = (splitList[2] + ' ' + splitList[1] + ' ' + splitList[4].replace(".", ""))
@@ -44,7 +45,7 @@ fun testMap(map: HashMap<String, Boolean>) {
 }
 
 // creates list of keys and compares map to list.contains retrieval speed
-fun testAgainstList(person: String, map:HashMap<String, Boolean>){
+fun testAgainstList(map:HashMap<String, Boolean>, person:String){
     val list = map.keys.toList()
     val map_Time = measureNanoTime { map[person] }
     val list_Time = measureNanoTime { list.contains(person) }
