@@ -11,8 +11,6 @@ fun main(args: Array<String>) {
 
 //    testMap(map)
 
-//    println(map)
-
 //    testAgainstList(person, map)
 
     println(query(person))
