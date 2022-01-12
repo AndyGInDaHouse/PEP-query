@@ -13,11 +13,9 @@ fun main(args: Array<String>) {
 
     query.testMapListSpeed(person)
 
-    println(query.query(person))
-
     println(query.getMap())
 
-
+    println(query.query(person))
 }
 
 class Query {
