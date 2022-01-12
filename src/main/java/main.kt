@@ -9,13 +9,15 @@ fun main(args: Array<String>) {
     val query = Query()
     val person = query.createPersonKey(args[0], args[1], args[2])
 
-    println(query.query(person))
-
-    (query.getMap())
-
     query.testMap()
 
     query.testMapListSpeed(person)
+
+    println(query.query(person))
+
+    println(query.getMap())
+
+
 }
 
 class Query {
